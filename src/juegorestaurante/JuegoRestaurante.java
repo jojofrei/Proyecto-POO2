@@ -1,16 +1,29 @@
 package juegorestaurante;
 
-/**
- *
- * @author jojofrei
- */
-public class JuegoRestaurante {
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-    /**
-     * @param args the command line arguments
-     */
+public class JuegoRestaurante extends Application {
+
     public static void main(String[] args) {
-        // TODO code application logic here
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        try {
+            Parent p= FXMLLoader.load(getClass().getResource("/vista/PantallaPrincipal.fxml"));
+            Scene sc = new Scene(p,335,380);            
+            stage.setScene(sc);
+            stage.setResizable(false);
+            stage.setTitle("Juego Restaurante Cafeteria");
+            stage.show();           
+        }
+        catch (Exception ex) {            
+        }
     }
     
 }
