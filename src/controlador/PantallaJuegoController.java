@@ -7,7 +7,10 @@ package controlador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -16,12 +19,17 @@ import javafx.fxml.Initializable;
  */
 public class PantallaJuegoController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private Button btn_Jugar;
+
+    //Variables
+    boolean usuarioExisteJuego;
+    @FXML
+    private TextField txt_usuario;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }       
     
 }
