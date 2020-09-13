@@ -7,12 +7,14 @@ package helper;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -56,4 +58,42 @@ public class HelperArchivo {
         }
     }
     
+    //Permite actualizar el registro del puntaje del jugador 
+    public static void actualizarRegistroJugador(String ruta,String jugadorVerificar,String nuevoNivel,String nuevoPuntaje)
+    {
+        Scanner x;
+        String temporal = "temp.txt";
+        File antiguoArchivo = new File(ruta);
+        File nuevoArchivo   = new File(temporal);
+        String jugador,nivel,puntaje = "";
+        try
+        {
+            FileWriter fw = new FileWriter(temporal,true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            x = new Scanner(new File(ruta));
+            x.useDelimiter("[,\n]");
+            while(x.hasNext())
+            {
+                jugador      = x.next();
+                nivel        = x.next();
+                puntaje      = x.next();
+                if(jugadorVerificar.equalsIgnoreCase(jugador))               
+                    pw.println(jugadorVerificar+","+nuevoNivel+","+nuevoPuntaje);
+                else
+                    pw.println(jugador+","+nivel+","+puntaje);
+                
+            }
+            x.close();
+            pw.flush();
+            pw.close();
+            antiguoArchivo.delete();
+            File dump = new File(ruta);
+            nuevoArchivo.renameTo(dump);
+        }
+        catch(Exception ex)
+        {
+            
+        }        
+    }
 }
