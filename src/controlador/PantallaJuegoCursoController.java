@@ -234,6 +234,15 @@ public class PantallaJuegoCursoController implements Initializable {
         }
     }
     
+    private void limpiarListasSiguienteServida()
+    {
+        listaClientes.clear();
+        listaProductosCategoria1.clear();
+        listaProductosCategoria2.clear();
+        listaProductosClientes.clear();
+        listaProductosCocinando.clear();
+    }
+    
     private void limpiarHBoxVBox()
     {
         HBox_Categoria1_productos.getChildren().clear();
