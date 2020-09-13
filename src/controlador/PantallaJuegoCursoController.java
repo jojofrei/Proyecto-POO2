@@ -175,7 +175,7 @@ public class PantallaJuegoCursoController implements Initializable {
             }
             else
             {
-                estadoServicioCliente2 = helper.HelperJuego.verificarEstadoOrdenServida(cliente2.getProductosOrdenados(), listaProductosCocinando);
+                //estadoServicioCliente2 = helper.HelperJuego.verificarEstadoOrdenServida(cliente2.getProductosOrdenados(), listaProductosCocinando);
                 if(estadoServicioCliente2)
                 {    
                     //removerProductosCocinandose(cliente2.getProductosOrdenados());                        
@@ -195,6 +195,43 @@ public class PantallaJuegoCursoController implements Initializable {
             }                            
         }
             
+    }
+    
+    @FXML
+    private void servir_Cliente3(ActionEvent event) 
+    {
+        boolean estadoServicioCliente3 = false;
+        if(listaProductosCocinando.isEmpty()){
+            //mostrarAlerta("No puede servir al cliente, ya que no hay productos cocinandose");
+        }
+        else
+        {
+            if(paciencia_cliente3 <= 0)
+            {
+                //mostrarAlerta("Se acabo el tiempo, acabas de perder al cliente");                
+                //mostrarClientesPerdidos();
+            }
+            else
+            {
+                //estadoServicioCliente3 = helper.HelperJuego.verificarEstadoOrdenServida(cliente3.getProductosOrdenados(), listaProductosCocinando);
+                if(estadoServicioCliente3)
+                {    
+                    listaProductosCocinando.clear();
+                    VBox_Productos_Cocinando.getChildren().clear();
+                    
+                    //removerProductosCocinandose(cliente3.getProductosOrdenados());                        
+                    System.out.println("Cliente Servido correctamente");
+                    dineroAcumulado += (paciencia_cliente3*10);
+                    //mostrarDineroAcumulado();
+                    Lbl_Paciencia_Cli3.setText("Cliente ganado");
+                    btn_Servir_Cli3.setDisable(true);
+                    timer_Cliente3.cancel();
+                    pane_cli3.setVisible(false);
+                    //cargarHBoxCategoria1(listaProductosCategoria1);
+                    //cargarHBoxCategoria2(listaProductosCategoria2);        
+                }
+            }                            
+        }
     }
     
 }
