@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Timer;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -121,4 +122,40 @@ public class PantallaJuegoCursoController implements Initializable {
         nivelEnCurso  = nivel;
     }
     
+    @FXML
+    private void servir_Cliente1(ActionEvent event) 
+    {
+        boolean estadoServicioCliente1 = false;
+        if(listaProductosCocinando.isEmpty()){
+            //mostrarAlerta("No puede servir al cliente, ya que no hay productos cocinandose");
+        } 
+        else
+        {
+            if(paciencia_cliente1 <= 0)
+            {
+                //mostrarAlerta("Se acabo el tiempo, acabas de perder al cliente");
+                //mostrarClientesPerdidos();
+            }
+            else
+            {
+                //estadoServicioCliente1 = helper.HelperJuego.verificarEstadoOrdenServida(cliente1.getProductosOrdenados(), listaProductosCocinando);
+                if(estadoServicioCliente1)
+                {    
+                    listaProductosCocinando.clear();
+                    VBox_Productos_Cocinando.getChildren().clear();
+                    
+                    //removerProductosCocinandose(cliente1.getProductosOrdenados());                        
+                    System.out.println("Cliente Servido correctamente");
+                    dineroAcumulado += (paciencia_cliente1*10);
+                    //mostrarDineroAcumulado();
+                    Lbl_Paciencia_Cli1.setText("Cliente ganado");
+                    btn_Servir_Cli1.setDisable(true);
+                    timer_Cliente1.cancel();
+                    pane_cli1.setVisible(false);
+                    //cargarHBoxCategoria1(listaProductosCategoria1);
+                    //cargarHBoxCategoria2(listaProductosCategoria2);        
+                }
+            }                            
+        }
+    }
 }
