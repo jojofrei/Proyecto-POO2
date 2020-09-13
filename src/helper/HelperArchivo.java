@@ -26,6 +26,7 @@ public class HelperArchivo {
     public static String rutaImagenesCliente = rutaGeneral+"/src/recursos/clientes";          
     public static String rutaImagenesProductos = rutaGeneral+"/src/recursos/productos"; 
     
+    //Permite leer las lineas que provienen del archivo 
     public static ArrayList<String> leerLineasArchivo(String name)
     {    
         ArrayList<String> lineasArchivo = new ArrayList<>();        
