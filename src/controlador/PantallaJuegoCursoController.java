@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import helper.Constantes;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -232,6 +233,24 @@ public class PantallaJuegoCursoController implements Initializable {
                 }
             }                            
         }
+    }
+    
+     private void setearNumeroProductosListado()
+    {
+        switch(nivelEnCurso)
+        {
+            case 1:
+                cantProductosNivel = Constantes.CANT_MAX_OPCIONES_MENU_NIVEL1;
+                break;
+            
+            case 2:
+                cantProductosNivel = Constantes.CANT_MAX_OPCIONES_MENU_NIVEL2;
+                break;
+               
+            case 3:
+                cantProductosNivel = Constantes.CANT_MAX_OPCIONES_MENU_NIVEL3;
+                break;
+        }        
     }
     
     private void limpiarListasSiguienteServida()
