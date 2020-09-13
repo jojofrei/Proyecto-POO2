@@ -158,4 +158,43 @@ public class PantallaJuegoCursoController implements Initializable {
             }                            
         }
     }
+    
+    @FXML
+    private void servir_Cliente2(ActionEvent event) 
+    {
+        boolean estadoServicioCliente2 = false;
+        if(listaProductosCocinando.isEmpty()){
+            //mostrarAlerta("No puede servir al cliente, ya que no hay productos cocinandose");
+        }
+        else
+        {
+            if(paciencia_cliente2 <= 0)
+            {
+                //mostrarAlerta("Se acabo el tiempo, acabas de perder al cliente");                
+                //mostrarClientesPerdidos();
+            }
+            else
+            {
+                estadoServicioCliente2 = helper.HelperJuego.verificarEstadoOrdenServida(cliente2.getProductosOrdenados(), listaProductosCocinando);
+                if(estadoServicioCliente2)
+                {    
+                    //removerProductosCocinandose(cliente2.getProductosOrdenados());                        
+                    listaProductosCocinando.clear();
+                    VBox_Productos_Cocinando.getChildren().clear();
+                    
+                    System.out.println("Cliente Servido correctamente");
+                    dineroAcumulado += (paciencia_cliente2*10);
+                    //mostrarDineroAcumulado();
+                    Lbl_Paciencia_Cli2.setText("Cliente ganado");
+                    btn_Servir_Cli2.setDisable(true);
+                    timer_Cliente2.cancel();
+                    pane_cli2.setVisible(false);
+                    //cargarHBoxCategoria1(listaProductosCategoria1);
+                    //cargarHBoxCategoria2(listaProductosCategoria2);        
+                }
+            }                            
+        }
+            
+    }
+    
 }
