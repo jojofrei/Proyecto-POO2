@@ -280,6 +280,16 @@ public class PantallaJuegoCursoController implements Initializable {
         //iniciarConteoRegresivoCliente1();        
     }
     
+    private void cargarCliente2(Cliente cliente)
+    {
+        cliente2 = cliente;
+        pane_cli2.setVisible(true);
+        //img_cli2.setImage(helper.HelperJuego.getImagenCliente(cliente.getNombreImagen()));
+        //cargarProductosCliente2(cliente);
+        paciencia_cliente2 = cliente.getPaciencia();
+        //iniciarConteoRegresivoCliente2();        
+    }
+    
      private void setearNumeroProductosListado()
     {
         switch(nivelEnCurso)
