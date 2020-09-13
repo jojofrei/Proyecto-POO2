@@ -235,6 +235,40 @@ public class PantallaJuegoCursoController implements Initializable {
         }
     }
     
+    //Cargar clientes
+    public void cargarClientes()
+    {
+        btn_Servir_Cli1.setDisable(false);
+        btn_Servir_Cli2.setDisable(false);
+        btn_Servir_Cli3.setDisable(false);
+        //listaClientes = helper.HelperJuego.getListaRandomClientes(listaProductosClientes);
+        pane_cli1.setVisible(false);
+        pane_cli2.setVisible(false);
+        pane_cli3.setVisible(false);
+        
+        timer_Cliente1.cancel();
+        timer_Cliente2.cancel();
+        timer_Cliente3.cancel();
+                
+        for(Cliente cliente : listaClientes)
+        {
+            switch(cliente.getNumeroCliente())
+            {
+                case 1:
+                    //cargarCliente1(cliente);
+                    break;
+                
+                case 2:                    
+                    //cargarCliente2(cliente);
+                    break;
+                
+                case 3:
+                    //cargarCliente3(cliente);
+                    break;
+            }            
+        }
+    }
+    
      private void setearNumeroProductosListado()
     {
         switch(nivelEnCurso)
