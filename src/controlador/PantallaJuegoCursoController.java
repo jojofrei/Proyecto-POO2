@@ -140,7 +140,7 @@ public class PantallaJuegoCursoController implements Initializable {
             }
             else
             {
-                //estadoServicioCliente1 = helper.HelperJuego.verificarEstadoOrdenServida(cliente1.getProductosOrdenados(), listaProductosCocinando);
+                estadoServicioCliente1 = helper.HelperJuego.verificarEstadoOrdenServida(cliente1.getProductosOrdenados(), listaProductosCocinando);
                 if(estadoServicioCliente1)
                 {    
                     listaProductosCocinando.clear();
@@ -177,7 +177,7 @@ public class PantallaJuegoCursoController implements Initializable {
             }
             else
             {
-                //estadoServicioCliente2 = helper.HelperJuego.verificarEstadoOrdenServida(cliente2.getProductosOrdenados(), listaProductosCocinando);
+                estadoServicioCliente2 = helper.HelperJuego.verificarEstadoOrdenServida(cliente2.getProductosOrdenados(), listaProductosCocinando);
                 if(estadoServicioCliente2)
                 {    
                     //removerProductosCocinandose(cliente2.getProductosOrdenados());                        
@@ -215,7 +215,7 @@ public class PantallaJuegoCursoController implements Initializable {
             }
             else
             {
-                //estadoServicioCliente3 = helper.HelperJuego.verificarEstadoOrdenServida(cliente3.getProductosOrdenados(), listaProductosCocinando);
+                estadoServicioCliente3 = helper.HelperJuego.verificarEstadoOrdenServida(cliente3.getProductosOrdenados(), listaProductosCocinando);
                 if(estadoServicioCliente3)
                 {    
                     listaProductosCocinando.clear();
@@ -242,7 +242,7 @@ public class PantallaJuegoCursoController implements Initializable {
         btn_Servir_Cli1.setDisable(false);
         btn_Servir_Cli2.setDisable(false);
         btn_Servir_Cli3.setDisable(false);
-        //listaClientes = helper.HelperJuego.getListaRandomClientes(listaProductosClientes);
+        listaClientes = helper.HelperJuego.getListaRandomClientes(listaProductosClientes);
         pane_cli1.setVisible(false);
         pane_cli2.setVisible(false);
         pane_cli3.setVisible(false);
@@ -256,15 +256,15 @@ public class PantallaJuegoCursoController implements Initializable {
             switch(cliente.getNumeroCliente())
             {
                 case 1:
-                    //cargarCliente1(cliente);
+                    cargarCliente1(cliente);
                     break;
                 
                 case 2:                    
-                    //cargarCliente2(cliente);
+                    cargarCliente2(cliente);
                     break;
                 
                 case 3:
-                    //cargarCliente3(cliente);
+                    cargarCliente3(cliente);
                     break;
             }            
         }
@@ -275,7 +275,7 @@ public class PantallaJuegoCursoController implements Initializable {
     {
         cliente1 = cliente;
         pane_cli1.setVisible(true);
-        //img_cli1.setImage(helper.HelperJuego.getImagenCliente(cliente.getNombreImagen()));
+        img_cli1.setImage(helper.HelperJuego.getImagenCliente(cliente.getNombreImagen()));
         //cargarProductosCliente1(cliente);
         paciencia_cliente1 = cliente.getPaciencia();
         //iniciarConteoRegresivoCliente1();        
@@ -285,7 +285,7 @@ public class PantallaJuegoCursoController implements Initializable {
     {
         cliente2 = cliente;
         pane_cli2.setVisible(true);
-        //img_cli2.setImage(helper.HelperJuego.getImagenCliente(cliente.getNombreImagen()));
+        img_cli2.setImage(helper.HelperJuego.getImagenCliente(cliente.getNombreImagen()));
         //cargarProductosCliente2(cliente);
         paciencia_cliente2 = cliente.getPaciencia();
         //iniciarConteoRegresivoCliente2();        
@@ -295,7 +295,7 @@ public class PantallaJuegoCursoController implements Initializable {
     {
         cliente3 = cliente;
         pane_cli3.setVisible(true);
-        //img_cli3.setImage(helper.HelperJuego.getImagenCliente(cliente.getNombreImagen()));
+        img_cli3.setImage(helper.HelperJuego.getImagenCliente(cliente.getNombreImagen()));
         //cargarProductosCliente3(cliente);
         paciencia_cliente3 = cliente.getPaciencia();
         //iniciarConteoRegresivoCliente3();
@@ -307,11 +307,24 @@ public class PantallaJuegoCursoController implements Initializable {
         HBox_Cli1_productos.getChildren().clear();
         for(Producto producto : cliente.getProductosOrdenados())
         {
-            //ImageView Img_Cliente1_prod = new ImageView(helper.HelperJuego.getImagenProducto(producto.getNombreImagen()));
-            //Img_Cliente1_prod.setFitWidth(45);
-            //Img_Cliente1_prod.setFitHeight(45);            
-            //Img_Cliente1_prod.setCursor(Cursor.HAND);            
-            //HBox_Cli1_productos.getChildren().add(Img_Cliente1_prod);
+            ImageView Img_Cliente1_prod = new ImageView(helper.HelperJuego.getImagenProducto(producto.getNombreImagen()));
+            Img_Cliente1_prod.setFitWidth(45);
+            Img_Cliente1_prod.setFitHeight(45);            
+            Img_Cliente1_prod.setCursor(Cursor.HAND);            
+            HBox_Cli1_productos.getChildren().add(Img_Cliente1_prod);
+        }        
+    }
+    
+    private void cargarProductosCliente2(Cliente cliente)
+    {   
+        HBox_Cli2_productos.getChildren().clear();
+        for(Producto producto : cliente.getProductosOrdenados())
+        {
+            ImageView Img_Cliente2_prod = new ImageView(helper.HelperJuego.getImagenProducto(producto.getNombreImagen()));
+            Img_Cliente2_prod.setFitWidth(45);
+            Img_Cliente2_prod.setFitHeight(45);            
+            Img_Cliente2_prod.setCursor(Cursor.HAND);            
+            HBox_Cli2_productos.getChildren().add(Img_Cliente2_prod);
         }        
     }
     
