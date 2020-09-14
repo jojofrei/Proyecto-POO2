@@ -328,6 +328,19 @@ public class PantallaJuegoCursoController implements Initializable {
         }        
     }
     
+    private void cargarProductosCliente3(Cliente cliente)
+    {
+        HBox_Cli3_productos.getChildren().clear();
+        for(Producto producto : cliente.getProductosOrdenados())
+        {
+            ImageView Img_Cliente3_prod = new ImageView(helper.HelperJuego.getImagenProducto(producto.getNombreImagen()));
+            Img_Cliente3_prod.setFitWidth(45);
+            Img_Cliente3_prod.setFitHeight(45);            
+            Img_Cliente3_prod.setCursor(Cursor.HAND);            
+            HBox_Cli3_productos.getChildren().add(Img_Cliente3_prod);
+        }        
+    }
+    
      private void setearNumeroProductosListado()
     {
         switch(nivelEnCurso)
