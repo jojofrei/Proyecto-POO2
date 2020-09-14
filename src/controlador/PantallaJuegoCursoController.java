@@ -8,6 +8,7 @@ package controlador;
 import helper.Constantes;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -252,6 +254,23 @@ public class PantallaJuegoCursoController implements Initializable {
         alert.showAndWait();
     }
     
+    private void mostrarAlertaJuegoGanado(String mensaje)
+    {               
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Mensaje de Sistema");
+        alert.setHeaderText(mensaje);        
+        ButtonType botonSi = new ButtonType("Si");                    
+        alert.getButtonTypes().setAll(botonSi);
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.get() == botonSi)
+        {
+            timer_Cliente1.cancel();
+            timer_Cliente2.cancel();
+            timer_Cliente3.cancel();            
+            //reactivarJuego();
+        }
+    }
+    
     
     //Cargar clientes
     public void cargarClientes()
@@ -458,6 +477,9 @@ public class PantallaJuegoCursoController implements Initializable {
         }        
     }
     
+    
+    
+    
      //Inicializar el juego
     private void inicializarJuego()
     {
@@ -494,7 +516,7 @@ public class PantallaJuegoCursoController implements Initializable {
         //cliente2Perdido = false;
         //cliente3Perdido = false;
     }
-     
+    
     private void cargarSiguienteServida()
     {
         //Verificar numero Elementos a cargar en la lista
