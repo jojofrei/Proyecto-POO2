@@ -61,3 +61,30 @@ public class HelperJuego
         helper.HelperArchivo.guardarRegistroArchivo(archivo, lineaJuego);        
         return juego;
     }
+     public static void actualizarRegistroUsuario(String nombreJugador,int nivel, double puntaje)
+    {
+        String rutaPuntaje = "src/recursos/puntaje.txt";        
+        helper.HelperArchivo.actualizarRegistroJugador(rutaPuntaje, nombreJugador, String.valueOf(nivel), String.valueOf(puntaje));        
+    }
+        
+    public static ArrayList<String> getCategoriasProducto()
+    {
+        String categoriasProductos = helper.Constantes.categoriasProductos;        
+        String[] categoriaPart = categoriasProductos.split(",");
+        ArrayList<String> listaCategorias = new ArrayList<>();       
+        int indiceCategoriaRandom;        
+        int i = 0;
+        int verificadorRandom = 0;
+        while(i < 2)
+        {
+            indiceCategoriaRandom = new Random().nextInt(3);
+            if(indiceCategoriaRandom != verificadorRandom)
+            {
+                verificadorRandom = indiceCategoriaRandom;                
+                listaCategorias.add(categoriaPart[indiceCategoriaRandom]);           
+                i++;
+            }
+        }
+        return listaCategorias;
+    }
+    
