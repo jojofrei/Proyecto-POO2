@@ -365,6 +365,35 @@ public class PantallaJuegoCursoController implements Initializable {
             listaProductosClientes.add(producto);                
     }
     
+    private void cargarHBoxCategoria1(ArrayList<Producto> listaProductos)
+    {       
+        ImageView Img_Categoria1_prod;
+        for(Producto producto : listaProductos)
+        {
+            System.out.println("1 producto="+producto.getNombre()+","+producto.getCategoria());
+            Img_Categoria1_prod = new ImageView(helper.HelperJuego.getImagenProducto(producto.getNombreImagen()));
+            Img_Categoria1_prod.setFitWidth(90);
+            Img_Categoria1_prod.setFitHeight(90);            
+            Img_Categoria1_prod.setCursor(Cursor.HAND);
+            Img_Categoria1_prod.setOnMouseClicked((e) -> {     
+                    if(!listaProductosCocinando.contains(producto))
+                    {    
+                        listaProductosCocinando.add(producto);
+                        ImageView Img_Categoria1_prod_temp = new ImageView(helper.HelperJuego.getImagenProducto(producto.getNombreImagen()));
+                        Img_Categoria1_prod_temp.setFitWidth(60);
+                        Img_Categoria1_prod_temp.setFitHeight(60);                        
+                        VBox_Productos_Cocinando.getChildren().add(Img_Categoria1_prod_temp);
+                    }
+            });
+            HBox_Categoria1_productos.getChildren().add(Img_Categoria1_prod);
+        }
+        if(VBox_Productos_Cocinando.getChildren().isEmpty())
+            Lbl_Cocinando.setVisible(false);
+        else
+            Lbl_Cocinando.setVisible(true);
+            
+    }
+    
      private void setearNumeroProductosListado()
     {
         switch(nivelEnCurso)
