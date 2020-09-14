@@ -1,11 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.TablaPuntajesController">
-    
+<AnchorPane id="AnchorPane" prefHeight="370.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.TablaPuntajesController">
+   <children>
+      <Pane prefHeight="370.0" prefWidth="400.0" style="-fx-background-color: #ffe678;">
+         <children>
+            <Pane prefHeight="120.0" prefWidth="400.0">
+               <children>
+                  <TextField fx:id="txt_jugador" layoutX="20.0" layoutY="60.0" prefWidth="160.0" promptText="Ingrese Jugador" />
+                  <Label layoutX="20.0" layoutY="20.0" text="Consulta de Puntajes">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="264.0" layoutY="60.0" mnemonicParsing="false" onAction="#consultarPuntajes" text="Consultar">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <Pane layoutY="120.0" prefHeight="250.0" prefWidth="400.0">
+               <children>
+                  <ListView fx:id="lst_puntajes" layoutX="20.0" layoutY="25.0" prefHeight="200.0" prefWidth="330.0" />
+                  <Label fx:id="lbl_lista_puntajes" layoutX="20.0" text="Lista de Reportes">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl_Sinpuntajes" layoutX="20.0" text="No Hay reportes disponibles">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
 </AnchorPane>
