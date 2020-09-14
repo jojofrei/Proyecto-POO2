@@ -505,7 +505,13 @@ public class PantallaJuegoCursoController implements Initializable {
     }
     
     
-    
+    private void mostrarClientesPerdidos()
+    {                
+        if(clientesPerdidos >= Constantes.MAXIMA_CANTIDAD_CLIENTES_PERDIDOS_JUEGO_ACABADO)        
+            mostrarAlertaJuegoPerdido("Has perdido demasiados clientes, Juego terminado...");
+        else if(!pane_cli1.isVisible() && !pane_cli2.isVisible() && !pane_cli3.isVisible())
+            cargarSiguienteServida();
+    }
     
      //Inicializar el juego
     private void inicializarJuego()
