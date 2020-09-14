@@ -13,6 +13,7 @@ import java.util.Timer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -298,6 +299,20 @@ public class PantallaJuegoCursoController implements Initializable {
         //cargarProductosCliente3(cliente);
         paciencia_cliente3 = cliente.getPaciencia();
         //iniciarConteoRegresivoCliente3();
+    }
+    
+    //Cargar productos Clientes    
+    private void cargarProductosCliente1(Cliente cliente)
+    {
+        HBox_Cli1_productos.getChildren().clear();
+        for(Producto producto : cliente.getProductosOrdenados())
+        {
+            //ImageView Img_Cliente1_prod = new ImageView(helper.HelperJuego.getImagenProducto(producto.getNombreImagen()));
+            //Img_Cliente1_prod.setFitWidth(45);
+            //Img_Cliente1_prod.setFitHeight(45);            
+            //Img_Cliente1_prod.setCursor(Cursor.HAND);            
+            //HBox_Cli1_productos.getChildren().add(Img_Cliente1_prod);
+        }        
     }
     
      private void setearNumeroProductosListado()
