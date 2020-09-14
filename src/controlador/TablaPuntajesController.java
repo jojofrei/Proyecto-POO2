@@ -42,4 +42,30 @@ public class TablaPuntajesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         lbl_Sinpuntajes.setVisible(true);
         lbl_lista_puntajes.setVisible(false);
-    }    
+    }
+    @FXML
+    private void consultarPuntajes(ActionEvent event) 
+    {
+        mostrarListadoPuntajes(txt_jugador.getText().trim());
+    }
+     private void mostrarListadoPuntajes(String jugador)
+    {
+        if(jugador.trim().isEmpty())
+            mostrarAlertaErrorIngreso("Debe regisrar el nombre del jugador");
+        else
+        {
+            lbl_Sinpuntajes.setVisible(false);        
+            lst_puntajes.getItems().clear();
+            ArrayList<Puntaje> listaPuntaje = helper.HelperJuego.getListadoPuntajes(jugador);
+            if(listaPuntaje.isEmpty())
+                lbl_Sinpuntajes.setVisible(true);
+            else
+            {
+                lbl_lista_puntajes.setVisible(true);
+                for(Puntaje puntaje: listaPuntaje)
+                    listaPuntajes.add(puntaje.getJugador()+"-"+puntaje.getNivel()+"-"+puntaje.getPuntaje());                           
+                lst_puntajes.setItems(listaPuntajes);
+            }
+        }
+    }  
+
