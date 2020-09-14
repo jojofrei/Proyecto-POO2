@@ -341,6 +341,30 @@ public class PantallaJuegoCursoController implements Initializable {
         }        
     }
     
+    //Cargar productos
+    private void cargarCategoriasProductos()
+    {        
+        ArrayList<String> listaCategorias = helper.HelperJuego.getCategoriasProducto();           
+        //cantProductosNivel = helper.HelperJuego.chequearNumProductosPorNivel(nivelEnCurso);
+        System.out.println("nivelEnCurso="+nivelEnCurso+","+cantProductosNivel);
+        
+        //Mostrar categorias
+        lbl_cat1.setText(listaCategorias.get(0));        
+        lbl_cat2.setText(listaCategorias.get(1));
+        
+        //Verificar la cantidad de productos a mostrar por lista 
+        
+        
+        //Mostrar listas de productos por cada categoria
+        listaProductosCategoria1 = helper.HelperJuego.getListaProductosCategoria(listaCategorias.get(0), cantProductosNivel);        
+        listaProductosCategoria2 = helper.HelperJuego.getListaProductosCategoria(listaCategorias.get(1), cantProductosNivel);        
+        
+        for(Producto producto: listaProductosCategoria1)                   
+            listaProductosClientes.add(producto);        
+        for(Producto producto: listaProductosCategoria2)                    
+            listaProductosClientes.add(producto);                
+    }
+    
      private void setearNumeroProductosListado()
     {
         switch(nivelEnCurso)
