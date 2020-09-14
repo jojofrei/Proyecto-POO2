@@ -233,4 +233,65 @@ public class HelperJuego
         }
         return siguienteNivel;
     }
+    public static Image getImagenCliente(String urlImagen)
+    {
+        File archivo;
+        Image imagen;                
+        archivo = new File(helper.HelperArchivo.rutaImagenesCliente+"/"+urlImagen);
+        imagen = new Image(archivo.toURI().toString());                                
+        return imagen;
+    }
     
+    public static Image getImagenProducto(String urlImagen)
+    {
+        File archivo;
+        Image imagen;                
+        archivo = new File(helper.HelperArchivo.rutaImagenesProductos+"/"+urlImagen);
+        imagen = new Image(archivo.toURI().toString());               
+        return imagen;
+    }
+    
+    //Permite obtener el listado de puntajes
+    public static ArrayList<Puntaje> getListadoPuntajes(String jugador)
+    {
+        ArrayList<Puntaje> listado = new ArrayList<>();
+        String rutaPuntaje = "src/recursos/puntaje.txt";        
+        try 
+        {
+            File archivo = new File(rutaPuntaje);
+            if(!archivo.exists())
+                return listado;
+
+            listado = listadoPuntajes(rutaPuntaje,jugador);                                    
+        }
+        catch(Exception ex)
+        {
+            return listado;
+        }        
+        return listado;                
+    }
+    
+    //Permite consultar al archivo de reportes del puntaje de los jugadores
+    public static ArrayList<Puntaje> listadoPuntajes(String ruta, String jugador)
+    {        
+        ArrayList<String> listadoPuntajes = helper.HelperArchivo.leerLineasArchivo(ruta);
+        ArrayList<Puntaje> listado = new ArrayList<>();                
+        int nivel;
+        double puntajeGanado;
+        
+        for(String puntaje : listadoPuntajes)
+        {
+            System.out.println("puntaje="+puntaje);
+            String[] puntajePart = puntaje.split(",");            
+            if(jugador.equalsIgnoreCase(puntajePart[0]))
+            {                
+                nivel         = Integer.parseInt(puntajePart[1]);
+                puntajeGanado = Double.parseDouble(puntajePart[2]);                
+                listado.add(new Puntaje(jugador,nivel,puntajeGanado));
+            }            
+        }                
+        return listado;
+    }
+                  
+}
+
