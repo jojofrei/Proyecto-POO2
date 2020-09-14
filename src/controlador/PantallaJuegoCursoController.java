@@ -505,6 +505,37 @@ public class PantallaJuegoCursoController implements Initializable {
         }        
     }
     
+    //Mostrar informacion de clientes
+    private void cargarClientePerdido(int cliente)
+    {        
+        switch(cliente)
+        {
+            case 1:
+                btn_Servir_Cli1.setDisable(true);
+                Lbl_Paciencia_Cli1.setText("Cliente perdido");                                
+                Lbl_ClientesPerdidos.setText("Perdidos: "+clientesPerdidos);
+                pane_cli1.setVisible(false);
+                mostrarClientesPerdidos();
+                break;
+                
+            case 2:
+                btn_Servir_Cli2.setDisable(true);
+                Lbl_Paciencia_Cli2.setText("Cliente perdido");                                
+                Lbl_ClientesPerdidos.setText("Perdidos: "+clientesPerdidos);
+                pane_cli2.setVisible(false);
+                mostrarClientesPerdidos();
+                break;
+                
+            case 3:
+                btn_Servir_Cli3.setDisable(true);
+                Lbl_Paciencia_Cli3.setText("Cliente perdido");              
+                Lbl_ClientesPerdidos.setText("Perdidos: "+clientesPerdidos);
+                pane_cli3.setVisible(false);
+                mostrarClientesPerdidos();
+                break;
+        }        
+    }
+    
     private void removerProductosCocinandose(ArrayList<Producto> listaProductosCliente)
     {
         String nombre;
