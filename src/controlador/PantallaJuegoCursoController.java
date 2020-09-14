@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Timer;
+import java.util.TimerTask;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -244,6 +246,29 @@ public class PantallaJuegoCursoController implements Initializable {
     private void cargarSiguienteRonda(ActionEvent event) 
     {
         cargarSiguienteServida();
+    }
+    
+    /******************************************************************************/    
+    //Metodos de Timers de los clientes
+    //Permite iniciar el conteo regresivo de la paciencia del cliente
+    private void iniciarConteoRegresivoCliente1()
+    {
+        timer_Cliente1 = new Timer();
+        timer_Cliente1.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                if(paciencia_cliente1 > 0)
+                {
+                    //Platform.runLater(() -> mostrarPacienciaRegresivaCliente1(paciencia_cliente1));                    
+                    paciencia_cliente1--;
+                }
+                else
+                {
+                    timer_Cliente1.cancel();
+                    clientesPerdidos++;
+                    Platform.runLater(() -> cargarClientePerdido(1));
+                }                    
+            }
+        }, 1000,1000);
     }
     
     //Mostrar alertas
