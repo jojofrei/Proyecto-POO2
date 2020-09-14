@@ -154,8 +154,8 @@ public class PantallaJuegoCursoController implements Initializable {
                     btn_Servir_Cli1.setDisable(true);
                     timer_Cliente1.cancel();
                     pane_cli1.setVisible(false);
-                    //cargarHBoxCategoria1(listaProductosCategoria1);
-                    //cargarHBoxCategoria2(listaProductosCategoria2);        
+                    cargarHBoxCategoria1(listaProductosCategoria1);
+                    cargarHBoxCategoria2(listaProductosCategoria2);        
                 }
             }                            
         }
@@ -191,8 +191,8 @@ public class PantallaJuegoCursoController implements Initializable {
                     btn_Servir_Cli2.setDisable(true);
                     timer_Cliente2.cancel();
                     pane_cli2.setVisible(false);
-                    //cargarHBoxCategoria1(listaProductosCategoria1);
-                    //cargarHBoxCategoria2(listaProductosCategoria2);        
+                    cargarHBoxCategoria1(listaProductosCategoria1);
+                    cargarHBoxCategoria2(listaProductosCategoria2);        
                 }
             }                            
         }
@@ -229,11 +229,17 @@ public class PantallaJuegoCursoController implements Initializable {
                     btn_Servir_Cli3.setDisable(true);
                     timer_Cliente3.cancel();
                     pane_cli3.setVisible(false);
-                    //cargarHBoxCategoria1(listaProductosCategoria1);
-                    //cargarHBoxCategoria2(listaProductosCategoria2);        
+                    cargarHBoxCategoria1(listaProductosCategoria1);
+                    cargarHBoxCategoria2(listaProductosCategoria2);        
                 }
             }                            
         }
+    }
+    
+    @FXML
+    private void cargarSiguienteRonda(ActionEvent event) 
+    {
+        cargarSiguienteServida();
     }
     
     //Cargar clientes
@@ -441,6 +447,8 @@ public class PantallaJuegoCursoController implements Initializable {
         }        
     }
     
+
+     
     private void cargarSiguienteServida()
     {
         //Verificar numero Elementos a cargar en la lista
@@ -454,7 +462,7 @@ public class PantallaJuegoCursoController implements Initializable {
         cargarClientes();
     }     
      
-     private void limpiarListasSiguienteServida()
+    private void limpiarListasSiguienteServida()
     {
         listaClientes.clear();
         listaProductosCategoria1.clear();
