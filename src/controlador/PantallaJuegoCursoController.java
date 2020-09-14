@@ -271,6 +271,19 @@ public class PantallaJuegoCursoController implements Initializable {
         }
     }
     
+    private void mostrarAlertaJuegoPerdido(String mensaje)
+    {    
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Mensaje de Sistema");
+        alert.setHeaderText(mensaje);
+        ButtonType botonSi = new ButtonType("Si");                    
+        alert.getButtonTypes().setAll(botonSi);
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.get() == botonSi) {}           
+            //reactivarJuego();                                                
+    }
+    
+    
     
     //Cargar clientes
     public void cargarClientes()
