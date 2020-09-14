@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -241,6 +242,16 @@ public class PantallaJuegoCursoController implements Initializable {
     {
         cargarSiguienteServida();
     }
+    
+    //Mostrar alertas
+    private void mostrarAlerta(String mensaje)
+    {               
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Mensaje de Sistema");
+        alert.setHeaderText(mensaje);        
+        alert.showAndWait();
+    }
+    
     
     //Cargar clientes
     public void cargarClientes()
