@@ -87,4 +87,34 @@ public class HelperJuego
         }
         return listaCategorias;
     }
+    public static ArrayList<Producto> getListaProductosCategoria(String categoria, int cantProductosMostrar)
+    {
+        String rutaProductos = helper.HelperArchivo.rutaArchivo+"/catalogoImagenes.csv";                
+        ArrayList<Producto> listaProductos = getListaProductos(rutaProductos);                           
+        ArrayList<Producto> listaProductosPorCategoria = new ArrayList<>();
+        ArrayList<Producto> listaProductosCategoria = getListaProductosPorCategoria(categoria,listaProductos);
+        int cantProductos = listaProductosCategoria.size();        
+        int i = 0;
+        int indiceRandom = 0;
+        while(i < cantProductosMostrar)
+        {
+            indiceRandom = new Random().nextInt(cantProductos);            
+            if(!listaProductosPorCategoria.contains(listaProductosCategoria.get(indiceRandom)))
+            {
+                listaProductosPorCategoria.add(listaProductosCategoria.get(indiceRandom));
+                i++;
+            }
+        }
+        return listaProductosPorCategoria;
+    }
     
+    public static ArrayList<Producto> getListaProductosPorCategoria(String categoria, ArrayList<Producto> productos)
+    {
+        ArrayList<Producto> listaProductosCategoria = new ArrayList<>();       
+        for(Producto producto : productos)
+        {            
+            if(categoria.equalsIgnoreCase(producto.getCategoria()))                                
+                listaProductosCategoria.add(producto);            
+        }       
+        return listaProductosCategoria;
+    }
