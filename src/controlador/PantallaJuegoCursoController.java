@@ -292,7 +292,26 @@ public class PantallaJuegoCursoController implements Initializable {
         }, 1000,1000);
     }
     
-    
+    //Permite iniciar el conteo regresivo de la paciencia del cliente
+    private void iniciarConteoRegresivoCliente3()
+    {
+        timer_Cliente3 = new Timer();
+        timer_Cliente3.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                if(paciencia_cliente3 > 0)
+                {
+                    //Platform.runLater(() -> mostrarPacienciaRegresivaCliente3(paciencia_cliente3));                    
+                    paciencia_cliente3--;
+                }
+                else
+                {
+                    timer_Cliente3.cancel();
+                    clientesPerdidos++;
+                    Platform.runLater(() -> cargarClientePerdido(3));
+                }                    
+            }
+        }, 1000,1000);
+    }
     
     //Mostrar alertas
     private void mostrarAlerta(String mensaje)
