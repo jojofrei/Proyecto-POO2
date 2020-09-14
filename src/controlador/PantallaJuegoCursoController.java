@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -149,7 +150,7 @@ public class PantallaJuegoCursoController implements Initializable {
                     listaProductosCocinando.clear();
                     VBox_Productos_Cocinando.getChildren().clear();
                     
-                    //removerProductosCocinandose(cliente1.getProductosOrdenados());                        
+                    removerProductosCocinandose(cliente1.getProductosOrdenados());                        
                     System.out.println("Cliente Servido correctamente");
                     dineroAcumulado += (paciencia_cliente1*10);
                     mostrarDineroAcumulado();
@@ -183,7 +184,7 @@ public class PantallaJuegoCursoController implements Initializable {
                 estadoServicioCliente2 = helper.HelperJuego.verificarEstadoOrdenServida(cliente2.getProductosOrdenados(), listaProductosCocinando);
                 if(estadoServicioCliente2)
                 {    
-                    //removerProductosCocinandose(cliente2.getProductosOrdenados());                        
+                    removerProductosCocinandose(cliente2.getProductosOrdenados());                        
                     listaProductosCocinando.clear();
                     VBox_Productos_Cocinando.getChildren().clear();
                     
@@ -224,7 +225,7 @@ public class PantallaJuegoCursoController implements Initializable {
                     listaProductosCocinando.clear();
                     VBox_Productos_Cocinando.getChildren().clear();
                     
-                    //removerProductosCocinandose(cliente3.getProductosOrdenados());                        
+                    removerProductosCocinandose(cliente3.getProductosOrdenados());                        
                     System.out.println("Cliente Servido correctamente");
                     dineroAcumulado += (paciencia_cliente3*10);
                     mostrarDineroAcumulado();
@@ -502,6 +503,29 @@ public class PantallaJuegoCursoController implements Initializable {
                 cantProductosNivel = Constantes.CANT_MAX_OPCIONES_MENU_NIVEL3;
                 break;
         }        
+    }
+    
+    private void removerProductosCocinandose(ArrayList<Producto> listaProductosCliente)
+    {
+        String nombre;
+        String url;
+        ArrayList<Node> removalCandidates = new ArrayList<>();
+        for(Producto producto: listaProductosCliente)
+        {
+            System.out.println("nombre producto="+producto.getNombreImagen());
+            for(Node nodo : VBox_Productos_Cocinando.getChildren())
+            {
+                ImageView imagenProducto = (ImageView) nodo;
+                url = imagenProducto.getImage().getUrl();
+                nombre = url.substring(url.lastIndexOf('/')+1, url.length());
+                if(producto.getNombreImagen().equalsIgnoreCase(nombre))                
+                {
+                    System.out.println("Imagen producto="+nombre);
+                    removalCandidates.add(nodo);                    
+                }
+            }
+        }
+        VBox_Productos_Cocinando.getChildren().removeAll(removalCandidates);
     }
     
     private void mostrarDineroAcumulado()
