@@ -504,6 +504,12 @@ public class PantallaJuegoCursoController implements Initializable {
         }        
     }
     
+    private void mostrarDineroAcumulado()
+    {
+        int nivelActual = nivelEnCurso;
+        System.out.println("Dinero acumulado="+dineroAcumulado);
+        Lbl_DineroAcumulado.setText("$ Acumulado: "+dineroAcumulado);        
+    }
     
     private void mostrarClientesPerdidos()
     {                
