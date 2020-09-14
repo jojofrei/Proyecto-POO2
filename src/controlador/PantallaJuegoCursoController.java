@@ -300,7 +300,7 @@ public class PantallaJuegoCursoController implements Initializable {
             public void run() {
                 if(paciencia_cliente3 > 0)
                 {
-                    //Platform.runLater(() -> mostrarPacienciaRegresivaCliente3(paciencia_cliente3));                    
+                    Platform.runLater(() -> mostrarPacienciaRegresivaCliente3(paciencia_cliente3));                    
                     paciencia_cliente3--;
                 }
                 else
@@ -321,6 +321,11 @@ public class PantallaJuegoCursoController implements Initializable {
     private void mostrarPacienciaRegresivaCliente2(int paciencia)
     {
         Lbl_Paciencia_Cli2.setText("Paciencia: "+String.valueOf(paciencia));
+    }
+    
+    private void mostrarPacienciaRegresivaCliente3(int paciencia)
+    {
+        Lbl_Paciencia_Cli3.setText("Paciencia: "+String.valueOf(paciencia));
     }
     
     //Mostrar alertas
