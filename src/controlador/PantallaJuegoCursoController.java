@@ -440,7 +440,7 @@ public class PantallaJuegoCursoController implements Initializable {
     
     
     
-     private void setearNumeroProductosListado()
+    private void setearNumeroProductosListado()
     {
         switch(nivelEnCurso)
         {
@@ -458,7 +458,42 @@ public class PantallaJuegoCursoController implements Initializable {
         }        
     }
     
-
+     //Inicializar el juego
+    private void inicializarJuego()
+    {
+        //Instanciar los timers
+        if(timer_Cliente1 == null)timer_Cliente1 = new Timer();
+        if(timer_Cliente2 == null)timer_Cliente2 = new Timer();
+        if(timer_Cliente3 == null)timer_Cliente3 = new Timer();
+        
+        //Instanciar las listas
+        if(listaClientes == null)listaClientes = new ArrayList<>();                
+        if(listaProductosCategoria1 == null)listaProductosCategoria1 = new ArrayList<>();        
+        if(listaProductosCategoria2 == null)listaProductosCategoria2 = new ArrayList<>();
+        if(listaProductosClientes == null)listaProductosClientes = new ArrayList<>();
+        if(listaProductosCocinando == null)listaProductosCocinando = new ArrayList<>();
+        
+        //Resetear paciencias de clientes
+        paciencia_cliente1 = 0;
+        paciencia_cliente2 = 0;
+        paciencia_cliente3 = 0;
+        
+        //Resetear contadores
+        clientesPerdidos = 0;     
+    
+        //Instanciar los clientes
+        if(cliente1 == null) cliente1 = new Cliente();
+        if(cliente2 == null) cliente2 = new Cliente();
+        if(cliente3 == null) cliente3 = new Cliente();
+    
+        //Resetear acumulador
+        dineroAcumulado = 0;                    
+        
+        //Resetear estado de los clientes
+        //cliente1Perdido = false;
+        //cliente2Perdido = false;
+        //cliente3Perdido = false;
+    }
      
     private void cargarSiguienteServida()
     {
