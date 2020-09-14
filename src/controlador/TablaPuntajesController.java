@@ -67,5 +67,16 @@ public class TablaPuntajesController implements Initializable {
                 lst_puntajes.setItems(listaPuntajes);
             }
         }
-    }  
+    }
+      private void mostrarAlertaErrorIngreso(String mensaje)
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Mensaje de Sistema");
+        alert.setHeaderText(mensaje);        
+        alert.showAndWait();    
+    }
+    
+}
+
+
 
