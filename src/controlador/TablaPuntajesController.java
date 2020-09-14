@@ -5,9 +5,20 @@
  */
 package controlador;
 
+import helper.HelperJuego;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import modelo.Puntaje;
 
 /**
  * FXML Controller class
@@ -16,12 +27,19 @@ import javafx.fxml.Initializable;
  */
 public class TablaPuntajesController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private TextField txt_jugador;
+    @FXML
+    private ListView<String> lst_puntajes;
+    @FXML
+    private Label lbl_lista_puntajes;
+    @FXML
+    private Label lbl_Sinpuntajes;
+    
+    private ObservableList<String> listaPuntajes = FXCollections.observableArrayList();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        lbl_Sinpuntajes.setVisible(true);
+        lbl_lista_puntajes.setVisible(false);
     }    
-    
-}
