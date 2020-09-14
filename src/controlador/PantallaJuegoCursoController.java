@@ -132,14 +132,14 @@ public class PantallaJuegoCursoController implements Initializable {
     {
         boolean estadoServicioCliente1 = false;
         if(listaProductosCocinando.isEmpty()){
-            //mostrarAlerta("No puede servir al cliente, ya que no hay productos cocinandose");
+            mostrarAlerta("No puede servir al cliente, ya que no hay productos cocinandose");
         } 
         else
         {
             if(paciencia_cliente1 <= 0)
             {
-                //mostrarAlerta("Se acabo el tiempo, acabas de perder al cliente");
-                //mostrarClientesPerdidos();
+                mostrarAlerta("Se acabo el tiempo, acabas de perder al cliente");
+                mostrarClientesPerdidos();
             }
             else
             {
@@ -152,7 +152,7 @@ public class PantallaJuegoCursoController implements Initializable {
                     //removerProductosCocinandose(cliente1.getProductosOrdenados());                        
                     System.out.println("Cliente Servido correctamente");
                     dineroAcumulado += (paciencia_cliente1*10);
-                    //mostrarDineroAcumulado();
+                    mostrarDineroAcumulado();
                     Lbl_Paciencia_Cli1.setText("Cliente ganado");
                     btn_Servir_Cli1.setDisable(true);
                     timer_Cliente1.cancel();
@@ -169,14 +169,14 @@ public class PantallaJuegoCursoController implements Initializable {
     {
         boolean estadoServicioCliente2 = false;
         if(listaProductosCocinando.isEmpty()){
-            //mostrarAlerta("No puede servir al cliente, ya que no hay productos cocinandose");
+            mostrarAlerta("No puede servir al cliente, ya que no hay productos cocinandose");
         }
         else
         {
             if(paciencia_cliente2 <= 0)
             {
-                //mostrarAlerta("Se acabo el tiempo, acabas de perder al cliente");                
-                //mostrarClientesPerdidos();
+                mostrarAlerta("Se acabo el tiempo, acabas de perder al cliente");                
+                mostrarClientesPerdidos();
             }
             else
             {
@@ -189,7 +189,7 @@ public class PantallaJuegoCursoController implements Initializable {
                     
                     System.out.println("Cliente Servido correctamente");
                     dineroAcumulado += (paciencia_cliente2*10);
-                    //mostrarDineroAcumulado();
+                    mostrarDineroAcumulado();
                     Lbl_Paciencia_Cli2.setText("Cliente ganado");
                     btn_Servir_Cli2.setDisable(true);
                     timer_Cliente2.cancel();
@@ -207,14 +207,14 @@ public class PantallaJuegoCursoController implements Initializable {
     {
         boolean estadoServicioCliente3 = false;
         if(listaProductosCocinando.isEmpty()){
-            //mostrarAlerta("No puede servir al cliente, ya que no hay productos cocinandose");
+            mostrarAlerta("No puede servir al cliente, ya que no hay productos cocinandose");
         }
         else
         {
             if(paciencia_cliente3 <= 0)
             {
-                //mostrarAlerta("Se acabo el tiempo, acabas de perder al cliente");                
-                //mostrarClientesPerdidos();
+                mostrarAlerta("Se acabo el tiempo, acabas de perder al cliente");                
+                mostrarClientesPerdidos();
             }
             else
             {
@@ -227,7 +227,7 @@ public class PantallaJuegoCursoController implements Initializable {
                     //removerProductosCocinandose(cliente3.getProductosOrdenados());                        
                     System.out.println("Cliente Servido correctamente");
                     dineroAcumulado += (paciencia_cliente3*10);
-                    //mostrarDineroAcumulado();
+                    mostrarDineroAcumulado();
                     Lbl_Paciencia_Cli3.setText("Cliente ganado");
                     btn_Servir_Cli3.setDisable(true);
                     timer_Cliente3.cancel();
@@ -339,7 +339,7 @@ public class PantallaJuegoCursoController implements Initializable {
         cliente1 = cliente;
         pane_cli1.setVisible(true);
         img_cli1.setImage(helper.HelperJuego.getImagenCliente(cliente.getNombreImagen()));
-        //cargarProductosCliente1(cliente);
+        cargarProductosCliente1(cliente);
         paciencia_cliente1 = cliente.getPaciencia();
         //iniciarConteoRegresivoCliente1();        
     }
@@ -349,7 +349,7 @@ public class PantallaJuegoCursoController implements Initializable {
         cliente2 = cliente;
         pane_cli2.setVisible(true);
         img_cli2.setImage(helper.HelperJuego.getImagenCliente(cliente.getNombreImagen()));
-        //cargarProductosCliente2(cliente);
+        cargarProductosCliente2(cliente);
         paciencia_cliente2 = cliente.getPaciencia();
         //iniciarConteoRegresivoCliente2();        
     }
@@ -359,7 +359,7 @@ public class PantallaJuegoCursoController implements Initializable {
         cliente3 = cliente;
         pane_cli3.setVisible(true);
         img_cli3.setImage(helper.HelperJuego.getImagenCliente(cliente.getNombreImagen()));
-        //cargarProductosCliente3(cliente);
+        cargarProductosCliente3(cliente);
         paciencia_cliente3 = cliente.getPaciencia();
         //iniciarConteoRegresivoCliente3();
     }
