@@ -283,8 +283,22 @@ public class PantallaJuegoCursoController implements Initializable {
             //reactivarJuego();                                                
     }
     
+    private void mostrarAlertaPasasteNivel(String mensaje)
+    {    
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Mensaje de Sistema");
+        alert.setHeaderText(mensaje);
+        ButtonType botonSi = new ButtonType("Si");                    
+        alert.getButtonTypes().setAll(botonSi);
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.get() == botonSi) 
+        {
+            helper.HelperJuego.actualizarRegistroUsuario(nombreJugador, nivelEnCurso, dineroAcumulado);        
+            cargarSiguienteServida();
+        }
+    }
     
-    
+     
     //Cargar clientes
     public void cargarClientes()
     {
