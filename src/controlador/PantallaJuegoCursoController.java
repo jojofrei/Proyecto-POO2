@@ -421,6 +421,8 @@ public class PantallaJuegoCursoController implements Initializable {
             Lbl_Cocinando.setVisible(true);
     }
     
+    
+    
      private void setearNumeroProductosListado()
     {
         switch(nivelEnCurso)
@@ -439,7 +441,20 @@ public class PantallaJuegoCursoController implements Initializable {
         }        
     }
     
-    private void limpiarListasSiguienteServida()
+    private void cargarSiguienteServida()
+    {
+        //Verificar numero Elementos a cargar en la lista
+        
+        limpiarListasSiguienteServida();
+        limpiarHBoxVBox();
+        Lbl_ClientesPerdidos.setText("Perdidos: "+clientesPerdidos);
+        cargarCategoriasProductos();
+        cargarHBoxCategoria1(listaProductosCategoria1);
+        cargarHBoxCategoria2(listaProductosCategoria2);        
+        cargarClientes();
+    }     
+     
+     private void limpiarListasSiguienteServida()
     {
         listaClientes.clear();
         listaProductosCategoria1.clear();
