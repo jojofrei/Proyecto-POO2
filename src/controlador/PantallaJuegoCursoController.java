@@ -267,7 +267,7 @@ public class PantallaJuegoCursoController implements Initializable {
             timer_Cliente1.cancel();
             timer_Cliente2.cancel();
             timer_Cliente3.cancel();            
-            //reactivarJuego();
+            reactivarJuego();
         }
     }
     
@@ -279,8 +279,8 @@ public class PantallaJuegoCursoController implements Initializable {
         ButtonType botonSi = new ButtonType("Si");                    
         alert.getButtonTypes().setAll(botonSi);
         Optional<ButtonType> result = alert.showAndWait();
-        if(result.get() == botonSi) {}           
-            //reactivarJuego();                                                
+        if(result.get() == botonSi)           
+            reactivarJuego();                                                
     }
     
     private void mostrarAlertaPasasteNivel(String mensaje)
@@ -517,6 +517,40 @@ public class PantallaJuegoCursoController implements Initializable {
             mostrarAlertaJuegoPerdido("Has perdido demasiados clientes, Juego terminado...");
         else if(!pane_cli1.isVisible() && !pane_cli2.isVisible() && !pane_cli3.isVisible())
             cargarSiguienteServida();
+    }
+    
+    //Reiniciar el juego
+    private void reactivarJuego()
+    {
+        //Apagar timers de clientes
+        if(timer_Cliente1 != null)timer_Cliente1.cancel();
+        if(timer_Cliente2 != null)timer_Cliente2.cancel();
+        if(timer_Cliente3 != null)timer_Cliente3.cancel();
+        
+        //Resetear listas 
+        listaClientes.clear();
+        listaProductosCategoria1.clear();
+        listaProductosCategoria2.clear();
+        listaProductosClientes.clear();
+        listaProductosCocinando.clear();
+        
+        //Resetear HBox
+        HBox_Categoria1_productos.getChildren().clear();
+        HBox_Categoria2_productos.getChildren().clear();
+        HBox_Cli1_productos.getChildren().clear();
+        HBox_Cli2_productos.getChildren().clear();
+        HBox_Cli3_productos.getChildren().clear();
+
+        //Resetear VBox
+        VBox_Productos_Cocinando.getChildren().clear();
+        
+        clientesPerdidos = 0;
+        dineroAcumulado = 0;
+        nivelEnCurso = 1;
+        mostrarClientesPerdidos();
+        mostrarDineroAcumulado();
+        
+        cargarSiguienteServida();
     }
     
      //Inicializar el juego
