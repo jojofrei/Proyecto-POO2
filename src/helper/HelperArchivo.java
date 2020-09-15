@@ -24,8 +24,8 @@ public class HelperArchivo {
     private static String rutaGeneral = Paths.get("").toAbsolutePath().toString();
     public static String rutaArchivo = rutaGeneral+"/src/archivo";          
     public static String rutaImagenesCliente = rutaGeneral+"/src/recursos/clientes";          
-    public static String rutaImagenesProductos = rutaGeneral+"/src/recursos/productos"; 
-    
+    public static String rutaImagenesProductos = rutaGeneral+"/src/recursos/productos";          
+
     //Permite leer las lineas que provienen del archivo 
     public static ArrayList<String> leerLineasArchivo(String name)
     {    
@@ -58,7 +58,7 @@ public class HelperArchivo {
             System.out.println(e.getMessage());
         }
     }
-    
+        
     //Permite actualizar el registro del puntaje del jugador 
     public static void actualizarRegistroJugador(String ruta,String jugadorVerificar,String nuevoNivel,String nuevoPuntaje)
     {
