@@ -37,8 +37,8 @@ public class PantallaJuegoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }     
-    
+    }    
+
     @FXML
     private void comenzarJuego(ActionEvent event) 
     {
@@ -65,5 +65,4 @@ public class PantallaJuegoController implements Initializable {
             e.printStackTrace();
         }
     }    
-    
 }

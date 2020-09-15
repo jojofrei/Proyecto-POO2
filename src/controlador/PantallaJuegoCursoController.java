@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import helper.Constantes;
@@ -16,18 +11,19 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
-import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import modelo.Producto;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import modelo.Cliente;
-import modelo.Producto;
 
 /**
  * FXML Controller class
@@ -44,7 +40,7 @@ public class PantallaJuegoCursoController implements Initializable {
     private ArrayList<Producto> listaProductosCategoria1;
     private ArrayList<Producto> listaProductosCategoria2;
     private ArrayList<Producto> listaProductosClientes;
-    private ArrayList<Producto> listaProductosCocinando;
+    private ArrayList<Producto> listaProductosCocinando;    
     
     private int paciencia_cliente1;
     private int paciencia_cliente2;
@@ -63,7 +59,10 @@ public class PantallaJuegoCursoController implements Initializable {
     private int nivelEnCurso;
     private double dineroAcumulado;
     private int clientesPerdidos;
-        
+    private boolean cliente1Perdido;
+    private boolean cliente2Perdido;
+    private boolean cliente3Perdido;
+    
     @FXML
     private HBox HBox_Categoria1_productos;
     @FXML
@@ -110,39 +109,51 @@ public class PantallaJuegoCursoController implements Initializable {
     private Label Lbl_Cocinando;
     @FXML
     private Label Lbl_ClientesPerdidos;
-    
-
-  
+            
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        nivelEnCurso = 1;
-        cantProductosNivel = 4;
-        clientesPerdidos = 0;
-        VBox_Productos_Cocinando.setSpacing(15);        
-        Lbl_ClientesPerdidos.setText("Perdidos: "+clientesPerdidos);
         
-    } 
+    }
     
     public void cargarJuego(String Jugador,int nivel)
     {
         nombreJugador = Jugador;
-        nivelEnCurso  = nivel;
+        if(nivel == 0)
+            nivelEnCurso = 1;
+        else
+            nivelEnCurso = (nivel == 3) ? 1 : nivel;
+        
+        clientesPerdidos = 0;
+        VBox_Productos_Cocinando.setSpacing(15);        
+        Lbl_ClientesPerdidos.setText("Perdidos: "+clientesPerdidos);
+        
+        inicializarJuego();                                        
+        cargarCategoriasProductos();
+        
+        cargarHBoxCategoria1(listaProductosCategoria1);        
+        cargarHBoxCategoria2(listaProductosCategoria2);
+        
+        
+        //Carga Inicial Clientes
+        cargarClientes();
+                
+        mostrarClientesPerdidos();
+        mostrarDineroAcumulado();        
     }
-    
+                                    
     @FXML
     private void servir_Cliente1(ActionEvent event) 
     {
         boolean estadoServicioCliente1 = false;
-        if(listaProductosCocinando.isEmpty()){
+        if(listaProductosCocinando.isEmpty())
             mostrarAlerta("No puede servir al cliente, ya que no hay productos cocinandose");
-        } 
         else
         {
             if(paciencia_cliente1 <= 0)
             {
                 mostrarAlerta("Se acabo el tiempo, acabas de perder al cliente");
-                mostrarClientesPerdidos();
+                mostrarClientesPerdidos();                
             }
             else
             {
@@ -152,7 +163,7 @@ public class PantallaJuegoCursoController implements Initializable {
                     listaProductosCocinando.clear();
                     VBox_Productos_Cocinando.getChildren().clear();
                     
-                    removerProductosCocinandose(cliente1.getProductosOrdenados());                        
+                    //removerProductosCocinandose(cliente1.getProductosOrdenados());                        
                     System.out.println("Cliente Servido correctamente");
                     dineroAcumulado += (paciencia_cliente1*10);
                     mostrarDineroAcumulado();
@@ -160,8 +171,7 @@ public class PantallaJuegoCursoController implements Initializable {
                     btn_Servir_Cli1.setDisable(true);
                     timer_Cliente1.cancel();
                     pane_cli1.setVisible(false);
-                    cargarHBoxCategoria1(listaProductosCategoria1);
-                    cargarHBoxCategoria2(listaProductosCategoria2);        
+                    mostrarProgresoNivel();                                                                                
                 }
             }                            
         }
@@ -171,22 +181,21 @@ public class PantallaJuegoCursoController implements Initializable {
     private void servir_Cliente2(ActionEvent event) 
     {
         boolean estadoServicioCliente2 = false;
-        if(listaProductosCocinando.isEmpty()){
+        if(listaProductosCocinando.isEmpty())
             mostrarAlerta("No puede servir al cliente, ya que no hay productos cocinandose");
-        }
         else
         {
             if(paciencia_cliente2 <= 0)
             {
                 mostrarAlerta("Se acabo el tiempo, acabas de perder al cliente");                
-                mostrarClientesPerdidos();
+                mostrarClientesPerdidos();                
             }
             else
             {
                 estadoServicioCliente2 = helper.HelperJuego.verificarEstadoOrdenServida(cliente2.getProductosOrdenados(), listaProductosCocinando);
                 if(estadoServicioCliente2)
                 {    
-                    removerProductosCocinandose(cliente2.getProductosOrdenados());                        
+                    //removerProductosCocinandose(cliente2.getProductosOrdenados());                        
                     listaProductosCocinando.clear();
                     VBox_Productos_Cocinando.getChildren().clear();
                     
@@ -197,8 +206,7 @@ public class PantallaJuegoCursoController implements Initializable {
                     btn_Servir_Cli2.setDisable(true);
                     timer_Cliente2.cancel();
                     pane_cli2.setVisible(false);
-                    cargarHBoxCategoria1(listaProductosCategoria1);
-                    cargarHBoxCategoria2(listaProductosCategoria2);        
+                    mostrarProgresoNivel();                   
                 }
             }                            
         }
@@ -209,15 +217,14 @@ public class PantallaJuegoCursoController implements Initializable {
     private void servir_Cliente3(ActionEvent event) 
     {
         boolean estadoServicioCliente3 = false;
-        if(listaProductosCocinando.isEmpty()){
+        if(listaProductosCocinando.isEmpty())
             mostrarAlerta("No puede servir al cliente, ya que no hay productos cocinandose");
-        }
         else
         {
             if(paciencia_cliente3 <= 0)
             {
                 mostrarAlerta("Se acabo el tiempo, acabas de perder al cliente");                
-                mostrarClientesPerdidos();
+                mostrarClientesPerdidos();                
             }
             else
             {
@@ -227,7 +234,7 @@ public class PantallaJuegoCursoController implements Initializable {
                     listaProductosCocinando.clear();
                     VBox_Productos_Cocinando.getChildren().clear();
                     
-                    removerProductosCocinandose(cliente3.getProductosOrdenados());                        
+                    //removerProductosCocinandose(cliente3.getProductosOrdenados());                        
                     System.out.println("Cliente Servido correctamente");
                     dineroAcumulado += (paciencia_cliente3*10);
                     mostrarDineroAcumulado();
@@ -235,20 +242,19 @@ public class PantallaJuegoCursoController implements Initializable {
                     btn_Servir_Cli3.setDisable(true);
                     timer_Cliente3.cancel();
                     pane_cli3.setVisible(false);
-                    cargarHBoxCategoria1(listaProductosCategoria1);
-                    cargarHBoxCategoria2(listaProductosCategoria2);        
+                    mostrarProgresoNivel();                    
                 }
             }                            
         }
     }
-    
+                                    
     @FXML
     private void cargarSiguienteRonda(ActionEvent event) 
     {
         cargarSiguienteServida();
     }
     
-    /******************************************************************************/    
+/******************************************************************************/    
     //Metodos de Timers de los clientes
     //Permite iniciar el conteo regresivo de la paciencia del cliente
     private void iniciarConteoRegresivoCliente1()
@@ -356,19 +362,19 @@ public class PantallaJuegoCursoController implements Initializable {
     
     private void mostrarAlertaJuegoPerdido(String mensaje)
     {    
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Mensaje de Sistema");
         alert.setHeaderText(mensaje);
         ButtonType botonSi = new ButtonType("Si");                    
         alert.getButtonTypes().setAll(botonSi);
         Optional<ButtonType> result = alert.showAndWait();
-        if(result.get() == botonSi)           
+        if(result.get() == botonSi)            
             reactivarJuego();                                                
     }
     
     private void mostrarAlertaPasasteNivel(String mensaje)
     {    
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Mensaje de Sistema");
         alert.setHeaderText(mensaje);
         ButtonType botonSi = new ButtonType("Si");                    
@@ -381,7 +387,20 @@ public class PantallaJuegoCursoController implements Initializable {
         }
     }
     
-     
+    private void mostrarProgresoNivel()
+    {
+        int nivelActual = nivelEnCurso;
+        nivelEnCurso = helper.HelperJuego.chequearSiEsSiguienteNivel(dineroAcumulado, nivelEnCurso);
+        if(nivelEnCurso > 3)
+            mostrarAlertaJuegoGanado("Has ganado el juego, eres campeon...");
+        else if(nivelEnCurso > nivelActual)                    
+            mostrarAlertaPasasteNivel("Has pasado de nivel");
+        else
+            if(!pane_cli1.isVisible() && !pane_cli2.isVisible() && !pane_cli3.isVisible())
+                cargarSiguienteServida();
+        Lbl_Nivel.setText("Nivel: "+nivelEnCurso);
+    }    
+    
     //Cargar clientes
     public void cargarClientes()
     {
@@ -415,8 +434,8 @@ public class PantallaJuegoCursoController implements Initializable {
             }            
         }
     }
-    
-     //Cargar clientes
+        
+    //Cargar clientes
     private void cargarCliente1(Cliente cliente)
     {
         cliente1 = cliente;
@@ -424,7 +443,7 @@ public class PantallaJuegoCursoController implements Initializable {
         img_cli1.setImage(helper.HelperJuego.getImagenCliente(cliente.getNombreImagen()));
         cargarProductosCliente1(cliente);
         paciencia_cliente1 = cliente.getPaciencia();
-        //iniciarConteoRegresivoCliente1();        
+        iniciarConteoRegresivoCliente1();        
     }
     
     private void cargarCliente2(Cliente cliente)
@@ -434,7 +453,7 @@ public class PantallaJuegoCursoController implements Initializable {
         img_cli2.setImage(helper.HelperJuego.getImagenCliente(cliente.getNombreImagen()));
         cargarProductosCliente2(cliente);
         paciencia_cliente2 = cliente.getPaciencia();
-        //iniciarConteoRegresivoCliente2();        
+        iniciarConteoRegresivoCliente2();        
     }
     
     private void cargarCliente3(Cliente cliente)
@@ -444,7 +463,7 @@ public class PantallaJuegoCursoController implements Initializable {
         img_cli3.setImage(helper.HelperJuego.getImagenCliente(cliente.getNombreImagen()));
         cargarProductosCliente3(cliente);
         paciencia_cliente3 = cliente.getPaciencia();
-        //iniciarConteoRegresivoCliente3();
+        iniciarConteoRegresivoCliente3();
     }
     
     //Cargar productos Clientes    
@@ -491,7 +510,7 @@ public class PantallaJuegoCursoController implements Initializable {
     private void cargarCategoriasProductos()
     {        
         ArrayList<String> listaCategorias = helper.HelperJuego.getCategoriasProducto();           
-        //cantProductosNivel = helper.HelperJuego.chequearNumProductosPorNivel(nivelEnCurso);
+        cantProductosNivel = helper.HelperJuego.chequearNumProductosPorNivel(nivelEnCurso);
         System.out.println("nivelEnCurso="+nivelEnCurso+","+cantProductosNivel);
         
         //Mostrar categorias
@@ -509,7 +528,7 @@ public class PantallaJuegoCursoController implements Initializable {
             listaProductosClientes.add(producto);        
         for(Producto producto: listaProductosCategoria2)                    
             listaProductosClientes.add(producto);                
-    }
+    }    
     
     private void cargarHBoxCategoria1(ArrayList<Producto> listaProductos)
     {       
@@ -565,26 +584,6 @@ public class PantallaJuegoCursoController implements Initializable {
             Lbl_Cocinando.setVisible(false);
         else
             Lbl_Cocinando.setVisible(true);
-    }
-    
-    
-    
-    private void setearNumeroProductosListado()
-    {
-        switch(nivelEnCurso)
-        {
-            case 1:
-                cantProductosNivel = Constantes.CANT_MAX_OPCIONES_MENU_NIVEL1;
-                break;
-            
-            case 2:
-                cantProductosNivel = Constantes.CANT_MAX_OPCIONES_MENU_NIVEL2;
-                break;
-               
-            case 3:
-                cantProductosNivel = Constantes.CANT_MAX_OPCIONES_MENU_NIVEL3;
-                break;
-        }        
     }
     
     //Mostrar informacion de clientes
@@ -654,7 +653,7 @@ public class PantallaJuegoCursoController implements Initializable {
             mostrarAlertaJuegoPerdido("Has perdido demasiados clientes, Juego terminado...");
         else if(!pane_cli1.isVisible() && !pane_cli2.isVisible() && !pane_cli3.isVisible())
             cargarSiguienteServida();
-    }
+    }        
     
     //Reiniciar el juego
     private void reactivarJuego()
@@ -690,7 +689,7 @@ public class PantallaJuegoCursoController implements Initializable {
         cargarSiguienteServida();
     }
     
-     //Inicializar el juego
+    //Inicializar el juego
     private void inicializarJuego()
     {
         //Instanciar los timers
@@ -722,9 +721,9 @@ public class PantallaJuegoCursoController implements Initializable {
         dineroAcumulado = 0;                    
         
         //Resetear estado de los clientes
-        //cliente1Perdido = false;
-        //cliente2Perdido = false;
-        //cliente3Perdido = false;
+        cliente1Perdido = false;
+        cliente2Perdido = false;
+        cliente3Perdido = false;
     }
     
     private void cargarSiguienteServida()
@@ -738,8 +737,8 @@ public class PantallaJuegoCursoController implements Initializable {
         cargarHBoxCategoria1(listaProductosCategoria1);
         cargarHBoxCategoria2(listaProductosCategoria2);        
         cargarClientes();
-    }     
-     
+    }        
+    
     private void limpiarListasSiguienteServida()
     {
         listaClientes.clear();
