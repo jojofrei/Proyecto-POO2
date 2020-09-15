@@ -35,6 +35,7 @@ public class HelperJuego
         }
         catch(Exception ex)
         {
+            System.out.println("error de exception="+ex.getLocalizedMessage());
             return null;
         }       
     }    
@@ -58,10 +59,12 @@ public class HelperJuego
         
         //Se procede a guardar el jugador en el archivo puntaje
         String lineaJuego = juego.getNombreUsuario()+","+juego.getNivelEnCurso()+","+juego.getDineroAcumulado();
+        System.out.println("linea juego="+lineaJuego);
         helper.HelperArchivo.guardarRegistroArchivo(archivo, lineaJuego);        
         return juego;
     }
-     public static void actualizarRegistroUsuario(String nombreJugador,int nivel, double puntaje)
+    
+    public static void actualizarRegistroUsuario(String nombreJugador,int nivel, double puntaje)
     {
         String rutaPuntaje = "src/recursos/puntaje.txt";        
         helper.HelperArchivo.actualizarRegistroJugador(rutaPuntaje, nombreJugador, String.valueOf(nivel), String.valueOf(puntaje));        
@@ -87,6 +90,7 @@ public class HelperJuego
         }
         return listaCategorias;
     }
+    
     public static ArrayList<Producto> getListaProductosCategoria(String categoria, int cantProductosMostrar)
     {
         String rutaProductos = helper.HelperArchivo.rutaArchivo+"/catalogoImagenes.csv";                
@@ -117,7 +121,9 @@ public class HelperJuego
                 listaProductosCategoria.add(producto);            
         }       
         return listaProductosCategoria;
-    }public static ArrayList<Cliente> getListaRandomClientes(ArrayList<Producto> listaProductos)
+    }
+            
+    public static ArrayList<Cliente> getListaRandomClientes(ArrayList<Producto> listaProductos)
     {
         ArrayList<Cliente> listaClientes = new ArrayList<>();
         //Generacion de cantidad de clientes
@@ -233,6 +239,7 @@ public class HelperJuego
         }
         return siguienteNivel;
     }
+    
     public static Image getImagenCliente(String urlImagen)
     {
         File archivo;
@@ -292,6 +299,21 @@ public class HelperJuego
         }                
         return listado;
     }
-                  
+    
+    public static int chequearNumProductosPorNivel(int nivel)
+    {        
+        switch(nivel)
+        {
+            case 1:
+                return Constantes.CANT_MAX_OPCIONES_MENU_NIVEL1;                                                    
+                
+            case 2:
+                return Constantes.CANT_MAX_OPCIONES_MENU_NIVEL2;                                                    
+                
+            case 3:
+                return Constantes.CANT_MAX_OPCIONES_MENU_NIVEL3;                                                    
+            default:
+                return 0;                                                    
+        }        
+    }                  
 }
-
