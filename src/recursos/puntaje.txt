@@ -1,2 +1,6 @@
 Joel,3,190.0
 Max,3,290.0
+Isaac,3,220.0
+Lola,2,140.0
+Isabella,1,0.0
+Soledad,2,430.0
